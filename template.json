@@ -1,0 +1,68 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appService_DBAzureapp_name": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_location": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_name": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_resourceGroup": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_skuName": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_skuTier": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_skuFamily": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_skuSize": {
+            "type": "String"
+        },
+        "appServicePlan_DBAzureappPlan_workerSizeId": {
+            "type": "Int"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('appService_DBAzureapp_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "[parameters('appServicePlan_DBAzureappPlan_location')]",
+            "tags": {
+                "[concat('hidden-related:', resourceId(parameters('appServicePlan_DBAzureappPlan_resourceGroup'),'Microsoft.Web/serverfarms', parameters('appServicePlan_DBAzureappPlan_name')))]": "empty"
+            },
+            "properties": {
+                "name": "[parameters('appService_DBAzureapp_name')]",
+                "serverFarmId": "[resourceId(parameters('appServicePlan_DBAzureappPlan_resourceGroup'),'Microsoft.Web/serverfarms', parameters('appServicePlan_DBAzureappPlan_name'))]",
+                "kind": "app"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverFarms', parameters('appServicePlan_DBAzureappPlan_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "[parameters('appServicePlan_DBAzureappPlan_skuName')]",
+                "tier": "[parameters('appServicePlan_DBAzureappPlan_skuTier')]",
+                "family": "[parameters('appServicePlan_DBAzureappPlan_skuFamily')]",
+                "size": "[parameters('appServicePlan_DBAzureappPlan_skuSize')]"
+            },
+            "name": "[parameters('appServicePlan_DBAzureappPlan_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "[parameters('appServicePlan_DBAzureappPlan_location')]",
+            "properties": {
+                "name": "[parameters('appServicePlan_DBAzureappPlan_name')]"
+            }
+        }
+    ]
+}

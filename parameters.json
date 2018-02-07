@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appService_DBAzureapp_name": {
+            "value": "DBAzureapp"
+        },
+        "appServicePlan_DBAzureappPlan_location": {
+            "value": "South Central US"
+        },
+        "appServicePlan_DBAzureappPlan_name": {
+            "value": "DBAzureappPlan"
+        },
+        "appServicePlan_DBAzureappPlan_resourceGroup": {
+            "value": "AzDB"
+        },
+        "appServicePlan_DBAzureappPlan_skuName": {
+            "value": "S1"
+        },
+        "appServicePlan_DBAzureappPlan_skuTier": {
+            "value": "Standard"
+        },
+        "appServicePlan_DBAzureappPlan_skuFamily": {
+            "value": "S1"
+        },
+        "appServicePlan_DBAzureappPlan_skuSize": {
+            "value": "S"
+        },
+        "appServicePlan_DBAzureappPlan_workerSizeId": {
+            "value": 0
+        }
+    }
+}
